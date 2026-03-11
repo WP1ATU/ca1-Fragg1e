@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http' ;
 import { inject, Inject, Injectable, input, output, signal } from '@angular/core';
 import { take } from 'rxjs';
 import { Moviedetails } from '../models/moviedetails';
-
+import { FormsModule } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
