@@ -18,6 +18,7 @@ export class Movieapi {
   public totalResults = signal<number>(0);
   public maxPages = signal<number>(0);
   public currentPage = signal<number>(1);
+  public error = signal<string | null>(null);
   
   private _baseUrl = "https://www.omdbapi.com/";
   private _apiKey = "c5005890";
@@ -33,8 +34,10 @@ export class Movieapi {
       .subscribe(data => {
         console.log(data);
         this.movie.set(data);
+        
       
     });   
+    
   }
 
   searchMovie() {
@@ -43,20 +46,21 @@ export class Movieapi {
   }
 
 
-    getMovies(title: string, page: number = 1)
-    {
-      const url = `${this._baseUrl}?s=${title}&page=${page}&apikey=${this._apiKey}`;
+  getMovies(title: string, page: number = 1){
+    const url = `${this._baseUrl}?s=${title}&page=${page}&apikey=${this._apiKey}`;
 
-      this._http.get<SearchResults>(url)
-      .pipe(take(1))
-      .subscribe(data => {
-        this.totalResults.set(Number(data.totalResults));
-        this.movies.set(data.Search);
-        this.maxPages.set(Math.ceil(this.totalResults() / 10));
-        console.log(this.movies());
+    this._http.get<SearchResults>(url)
+    .pipe(take(1))
+    .subscribe(data => {
+      this.totalResults.set(Number(data.totalResults));
+      this.movies.set(data.Search);
+      this.maxPages.set(Math.ceil(this.totalResults() / 10));
+      console.log(this.movies());
+      this.error.set(data.Response === "False" ? data.Error || "Unknown error" : null);
+
+  });  
   
-    });  
-    }
+  }
 
     nextPage() {
       if (this.currentPage() < this.maxPages()) {
