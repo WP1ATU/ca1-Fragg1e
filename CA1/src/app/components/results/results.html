@@ -1,0 +1,54 @@
+
+<div class="search-results">
+  @for (movieData of movieService.movies(); track movieData.imdbID) {
+    <a class="movie-card" [routerLink]="['/movie', movieData.imdbID]">
+      <div class="poster-wrap">
+        <img
+          src="{{ movieData.Poster }}"
+          alt=" "
+          class="poster"
+        />
+      </div>
+
+      <div class="movie-info">
+        <h3>{{ movieData.Title }}</h3>
+        <p>{{ movieData.Year }}</p>
+      </div>
+    </a>
+  }
+</div>
+
+@if(movieService.totalResults() > 10) {
+<div class = "pagination-controls">
+    
+
+    @if(movieService.currentPage() > 1) {
+            <button class = "previousPage" (click)="movieService.previousPage()">Previous Page</button>
+        }
+        @else {
+            <button class = "previousPage" disabled (click)="movieService.previousPage()">Previous Page</button>
+    }
+
+    @if(movieService.currentPage() < movieService.maxPages()) {
+        <button class = "nextPage" (click)="movieService.nextPage()">Next Page</button>
+        }
+        @else {
+            <button class = "nextPage" disabled (click)="movieService.nextPage()">Next Page</button>
+    }   
+
+</div>
+<div class="search-information">
+    <p>Page {{ movieService.currentPage() }} of {{ movieService.maxPages() }}</p>
+    <p>Total Results: {{ movieService.totalResults() }}</p>
+</div>
+}
+
+
+    
+
+
+
+
+
+
+    

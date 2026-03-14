@@ -1,5 +1,7 @@
-<h2>Search Movies</h2>
-<div class="search-container">
+<div class = "search-container">
+    <h2>Search Movies</h2>
     <input type="text" placeholder="Enter movie title..." [(ngModel)]="searchQuery" />
-    <button (click)="movieService.searchMovie()">Search</button>
+    <button (click)="movieService.getMovies(searchQuery())">Search</button>
 </div>
+
+

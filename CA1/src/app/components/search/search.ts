@@ -14,4 +14,5 @@ export class Search {
 
   movieService = inject(Movieapi);
   searchQuery = this.movieService.searchQuery;
+
 }

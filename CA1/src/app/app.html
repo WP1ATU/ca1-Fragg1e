@@ -1,13 +1,19 @@
-<h1>My Movie App</h1>
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <app-search></app-search>
-    </div>
-    <div class="col">
-      <app-details></app-details>
-    </div>
-  </div>
-    
-</div>
+
+
+<main>
+
+  <nav class = "navbar text-white ">
+  <a routerLink="/" routerLinkActive="active">Home</a>
+
+  <a routerLink="/about">About</a>
+  </nav>
+  
+  <h1>Movie Finder {{ title() }}</h1>
+
+  <router-outlet></router-outlet>
+
+</main>
+
+
+
 
